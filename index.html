@@ -15,9 +15,9 @@
     <title>Bootstrap Theme</title>
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#main-nav" id="main-home"> 
     <!-- -----NAVBAR START----- -->
-    <nav class="navbar navbar-expand-sm navbar-dark fix-top">
+    <nav id="main-nav" class="navbar navbar-expand-sm navbar-dark fixed-top">
       <div class="container">
         <a href="index.html" class="navbar-brand">
           JLAB
@@ -27,14 +27,14 @@
           data-toggle="collapse"
           data-target="#navbarCollapse"
         >
-          <span class="navbar-toggler-icon">
-            <!-- <i class="fas fa-bars"></i> -->
+          <span>
+            <i class="fas fa-angle-double-down"></i>
           </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a href="#home" class="nav-link">Home</a>
+              <a href="#main-home" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
               <a href="#explore" class="nav-link">Explore</a>
@@ -142,7 +142,7 @@
 
     <!-- -----EXPLORE SECTION STARTS----- -->
 
-    <section id="explore">
+    <section id="explore" class="py-5">
       <div class="container">
         <div class="row">
           <div class="col text-center py-5">
@@ -206,7 +206,7 @@
 
     <!-- -----CREATE SECTION STARTS----- -->
 
-    <section id="create" class="bg-primary">
+    <section id="create" class="bg-primary py-5">
       <div class="container">
         <div class="row">
           <div class="col text-center py-4">
@@ -388,6 +388,8 @@
       </div>
     </div>
 
+    <!-- -----MODAL END----- -->
+
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -407,6 +409,28 @@
     <script>
       // Get the current year for the copyright
       $("#year").text(new Date().getFullYear());
+
+      //Init Scrollspy
+      $("body").scrollspy({ target: "#main-nav" });
+
+      // Smooth Scrolling
+      $("#main-nav a").on("click", function(event) {
+        if (this.hash !== "") {
+          event.preventDefault();
+
+          const hash = this.hash;
+
+          $("html, body").animate(
+            {
+              scrollTop: $(hash).offset().top
+            },
+            800,
+            function() {
+              window.location.hash = hash;
+            }
+          );
+        }
+      });
     </script>
   </body>
 </html>
